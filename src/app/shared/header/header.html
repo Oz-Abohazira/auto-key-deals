@@ -1,16 +1,18 @@
 <header class="header">
-    <!-- Left: Logo -->
-    <div class="logo">
-        <img (click)="goToHome()" src="assets/AutoKeyDealsLogo.png" alt="Auto Key Deals Logo" />
+    <div class="logo-container">
+        <img (click)="goToHome()" src="assets/AutoKeyDealsLogo.png" alt="Auto Key Deals Logo" class="logo" />
     </div>
 
-    <!-- Middle: Navigation -->
-    <nav class="nav-links">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-        <a routerLink="/catalog" routerLinkActive="active">Catalog</a>
-        <a routerLink="/contact" routerLinkActive="active">Contact</a>
-    </nav>
+    <div>
+        <nav class="nav-links">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+            <a routerLink="/how-it-works" routerLinkActive="active">How It Works</a>
+            <a routerLink="/catalog" routerLinkActive="active">Catalog</a>
+            <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        </nav>
+    </div>
 
-    <!-- Right: Action Button -->
-    <button class="cta-btn">Schedule a Call</button>
+    <div class="action">
+        <button class="cta-btn">Schedule a Call</button>
+    </div>
 </header>
