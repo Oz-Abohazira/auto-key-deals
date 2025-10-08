@@ -1,0 +1,30 @@
+$primary-start: #3B0CA0;
+$primary-end: #ef812c;
+$accent: #0078FF;
+$background: #FFFFFF;
+$surface: #F7F8FA;
+$text-primary: #1C1C1C;
+$text-secondary: #555555;
+
+$gradient-primary: linear-gradient(90deg, $primary-end 0%, $primary-start 100%);
+
+// Typography
+$font-heading: 'Poppins', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+// Global Styles
+body {
+  font-family: $font-body;
+  color: $text-primary;
+  background-color: $background;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-heading;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
