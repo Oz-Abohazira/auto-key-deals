@@ -86,7 +86,6 @@ Your project includes these Vercel-specific files:
 
 ### **API Functions**
 - `api/products.js` - Products endpoint
-- `api/contact.js` - Contact form handler
 
 ---
 
@@ -95,8 +94,6 @@ Your project includes these Vercel-specific files:
 - **Production Site**: `https://your-project-name.vercel.app`
 - **API Endpoints**:
   - Products: `https://your-project-name.vercel.app/api/products`
-  - Contact: `https://your-project-name.vercel.app/api/contact`
-
 ---
 
 ## 🔄 Automatic Deployments
