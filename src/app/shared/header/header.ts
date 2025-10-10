@@ -8,10 +8,19 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.scss'
 })
 export class Header {
+  isMobileMenuOpen = false;
 
   constructor(private router: Router) {}
 
   goToHome() {
     this.router.navigate(['/']);
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
   }
 }

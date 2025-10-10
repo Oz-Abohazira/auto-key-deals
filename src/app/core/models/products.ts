@@ -1,4 +1,5 @@
 export interface Vehicle {
+    minYear?: number;
     year: number;
     make: string;
     model: string;

@@ -414,16 +414,12 @@
     text-align: center;
   }
 
+  .hero-content {
+    order: 1; // Text content comes first (above cards)
+  }
+
   .hero-visual {
-    order: -1;
-
-    .mockup-container {
-      transform: none;
-
-      &:hover {
-        transform: scale(1.02);
-      }
-    }
+    display: none; // Completely hide mockup cards on mobile
   }
 
   .hero-buttons {
