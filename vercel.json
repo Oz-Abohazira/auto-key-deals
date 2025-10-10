@@ -1,11 +1,6 @@
 {
   "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist/frontend",
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
