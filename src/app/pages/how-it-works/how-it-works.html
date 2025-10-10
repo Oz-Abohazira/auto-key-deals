@@ -1,0 +1,105 @@
+<div class="how-it-works-container" #stepsContainer>
+  <!-- Progress Navigation -->
+  <nav class="progress-nav">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.transform]="'scaleX(' + (currentStep + 1) / steps.length + ')'"></div>
+    </div>
+    <div class="step-indicators">
+      @for (step of steps; track step.title; let i = $index) {
+        <button 
+          class="step-indicator"
+          [class.active]="i === currentStep"
+          [class.completed]="i < currentStep"
+          (click)="scrollToStep(i)"
+          [attr.aria-label]="'Go to step ' + (i + 1)">
+          <span class="step-number">{{ i + 1 }}</span>
+        </button>
+      }
+    </div>
+  </nav>
+
+  <!-- Steps -->
+  <div class="steps-wrapper">
+    @for (step of steps; track step.title; let i = $index) {
+      <section 
+        class="step"
+        [style.background]="step.bgGradient"
+        [attr.data-step]="i">
+        
+        <div class="step-content">
+          <!-- Image placeholder side -->
+          <div class="step-image-side" [class.right]="i % 2 === 0" [class.left]="i % 2 === 1">
+            <!-- Show actual images for steps 1-4, placeholder for step 5 -->
+            @if (i <= 3) {
+              <div class="image-container">
+                <img [src]="'assets/step' + (i + 1) + '.png'" [alt]="step.title" class="step-image">
+              </div>
+            } @else {
+              <div class="image-placeholder">
+                <div class="placeholder-content">
+                  <div class="placeholder-icon">📷</div>
+                  <p class="placeholder-text">Step {{ i + 1 }} Image</p>
+                  <small class="placeholder-subtitle">{{ step.title }}</small>
+                </div>
+              </div>
+            }
+          </div>
+          
+          <!-- Content card side -->
+          <div class="step-card-side" [class.left]="i % 2 === 0" [class.right]="i % 2 === 1">
+            <div class="step-card">
+              <div class="step-number-display">{{ i + 1 }}</div>
+              
+              <h1 class="step-title">{{ step.title }}</h1>
+              <h2 class="step-subtitle">{{ step.subtitle }}</h2>
+              <p class="step-description">{{ step.description }}</p>
+              
+              <ul class="step-features">
+                @for (feature of step.features; track feature) {
+                  <li class="feature-item">
+                    <span class="feature-check">✓</span>
+                    {{ feature }}
+                  </li>
+                }
+              </ul>
+              
+              @if (i === steps.length - 1) {
+                <div class="step-actions">
+                  <button class="cta-button" (click)="getStarted()">
+                    Find Your Key
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        
+        <!-- Scroll indicator for non-last steps -->
+        @if (i < steps.length - 1) {
+          <div class="scroll-indicator">
+            <!-- <div class="scroll-arrow">
+              <span>Scroll to continue</span>
+              <div class="arrow-down">↓</div>
+            </div> -->
+          </div>
+        }
+      </section>
+    }
+  </div>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta">
+    <div class="cta-content">
+      <h2>Ready to Get Your Key Fob?</h2>
+      <p>Join thousands of satisfied customers who trust AutoKeyDeals</p>
+      <div class="cta-buttons">
+        <button class="cta-button primary" (click)="getStarted()">
+          Browse Catalog
+        </button>
+        <a routerLink="/contact" class="cta-button secondary">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

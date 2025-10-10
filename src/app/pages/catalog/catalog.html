@@ -1,0 +1,179 @@
+<div class="catalog-container">
+  <!-- Hero Section -->
+  <section class="catalog-hero">
+    <div class="hero-content">
+      <p class="hero-title">Car Keys Catalog</p>
+      <p class="hero-subtitle">Find the perfect key fob for your vehicle from our extensive collection</p>
+    </div>
+    <div class="hero-gradient"></div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="filters-container">
+      <div class="filters-header">
+        <h2>Find Your Key Fob</h2>
+        @if (hasActiveFilters) {
+          <button 
+            class="clear-filters-btn" 
+            (click)="clearFilters()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+            Clear All
+          </button>
+        }
+      </div>
+      
+      <div class="filters-grid">
+        <!-- Search -->
+        <div class="filter-group">
+          <label class="filter-label">Search</label>
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+            <input 
+              type="text" 
+              class="search-input" 
+              placeholder="Search by vehicle make, model, year..."
+              [(ngModel)]="searchTerm">
+          </div>
+        </div>
+
+        <!-- Brand Filter -->
+        <div class="filter-group">
+          <label class="filter-label">Vehicle Brand</label>
+          <select class="filter-select" [(ngModel)]="selectedBrand">
+            @for (brand of availableBrands; track brand) {
+              <option [value]="brand === 'All Brands' ? '' : brand">
+                {{ brand }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Sort -->
+        <div class="filter-group">
+          <label class="filter-label">Sort By</label>
+          <select class="filter-select" [(ngModel)]="sortBy">
+            @for (option of sortOptions; track option.value) {
+              <option [value]="option.value">
+                {{ option.label }}
+              </option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="products-section">
+    <div class="products-container">
+      <!-- Results Counter -->
+      @if (filteredProducts$ | async; as products) {
+        <div class="results-counter">
+          <p class="results-text">
+            <span class="results-count">{{ products.length }}</span>
+            {{ products.length === 1 ? 'product' : 'products' }} found
+            @if (hasActiveFilters) {
+              <span class="filter-indicator">
+                matching your criteria
+              </span>
+            }
+          </p>
+        </div>
+
+        <div class="products-grid">
+          @for (product of products; track trackByProductId($index, product)) {
+            <div class="product-card">
+              <div class="card-header">
+                <div class="product-image-container">
+                  @if (product.imageUrl) {
+                    <img
+                      [src]="product.imageUrl"
+                      [alt]="product.name"
+                      class="product-image"
+                    />
+                  } @else {
+                    <div class="image-placeholder">
+                      <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                      </svg>
+                    </div>
+                  }
+                </div>
+                <div class="service-badges">
+                  @for (type of product.serviceTypes; track type) {
+                    <span class="service-badge">
+                      {{ type }}
+                    </span>
+                  }
+                </div>
+              </div>
+
+              <div class="card-content">
+                <h3 class="product-title">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description }}</p>
+
+                <div class="vehicles-section">
+                  <h4 class="vehicles-title">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg>
+                    Compatible Vehicles
+                    <span class="vehicle-count">({{ product.supportedVehicles.length }})</span>
+                  </h4>
+                  <div class="vehicles-grid">
+                    @for (vehicle of product.supportedVehicles.slice(0, 2); track vehicle.fullName) {
+                      <div 
+                        class="vehicle-chip"
+                        [class.matching]="isVehicleMatching(vehicle)">
+                        {{ getVehicleFullName(vehicle) }}
+                      </div>
+                    }
+                    @if (product.supportedVehicles.length > 2) {
+                      <div class="vehicle-chip more-vehicles">
+                        +{{ product.supportedVehicles.length - 2 }} more
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <button class="details-btn" [routerLink]="['/catalog', product.id]">
+                  <span>Order On Amazon</span>
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Empty State -->
+        @if (products.length === 0) {
+          <div class="empty-state">
+            <svg width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+            <h3>No products found</h3>
+            <p>Try adjusting your search criteria</p>
+          </div>
+        }
+      } @else {
+        <!-- Loading State -->
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <p class="loading-text">Loading key fobs...</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,46 @@
+ @use "tailwindcss";
+
+:root {
+  --primary-start: #3b0ca0;
+  --primary-end: #ef812c;
+  --accent: #0078ff;
+  --background: #ffffff;
+  --surface: #f7f8fa;
+  --text-primary: #1c1c1c;
+  --text-secondary: #555555;
+
+  --gradient-primary: linear-gradient(90deg, var(--primary-end) 0%, var(--primary-start) 100%);
+
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+
+  --small-spacing: 4px;
+  --medium-spacing: 8px;
+  --large-spacing: 16px;
+  --xl-spacing: 32px;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--background);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-heading);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

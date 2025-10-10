@@ -1,0 +1,25 @@
+<header class="header">
+    <!-- Hamburger Menu Button (Mobile Only) -->
+    <button class="hamburger-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+
+    <div class="logo-container">
+        <img (click)="goToHome()" src="assets/AutoKeyDealsLogo.png" alt="Auto Key Deals Logo" class="logo" />
+    </div>
+
+    <div class="nav-container" [class.mobile-menu-open]="isMobileMenuOpen" (click)="closeMobileMenu()">
+        <nav class="nav-links" [class.mobile-menu-open]="isMobileMenuOpen" (click)="$event.stopPropagation()">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">Home</a>
+            <a routerLink="/how-it-works" routerLinkActive="active" (click)="closeMobileMenu()">How It Works</a>
+            <a routerLink="/catalog" routerLinkActive="active" (click)="closeMobileMenu()">Catalog</a>
+            <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+        </nav>
+    </div>
+
+    <div class="action">
+        <button class="cta-btn">Order Now</button>
+    </div>
+</header>

@@ -1,0 +1,184 @@
+<div class="contact-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <p class="hero-title">Get In Touch</p>
+        <p class="hero-subtitle">
+          We're here to help with any questions, concerns, or support you need. 
+          Whether you're considering a purchase or need assistance with your order, 
+          our team is ready to assist you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Options Section -->
+  <section class="contact-options-section">
+    <div class="contact-container">
+      <div class="contact-grid">
+        
+        <!-- Email Support Card -->
+        <div class="contact-card primary-card">
+          <div class="card-icon">
+            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Email Support</h3>
+          <p class="card-description">
+            Our primary support channel for all your questions and concerns. 
+            Perfect for pre-order inquiries, technical support, and general assistance.
+          </p>
+          <div class="email-info">
+            <a href="mailto:autokeydeals1@gmail.com?subject=AutoKeyDeals Inquiry&body=Hello AutoKeyDeals,%0D%0A%0D%0AI have a question about:%0D%0A%0D%0A[Please describe your question or concern here]%0D%0A%0D%0AThank you!" class="email-link" title="Click to send us an email">
+              autokeydeals1@gmail.com
+            </a>
+            <button class="copy-email-btn" (click)="copyEmailToClipboard()" title="Copy email address">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="support-features">
+            <div class="feature-item">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+              </svg>
+              <span>Pre-order questions & guidance</span>
+            </div>
+            <div class="feature-item">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+              </svg>
+              <span>Vehicle compatibility verification</span>
+            </div>
+            <div class="feature-item">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+              </svg>
+              <span>Technical support & troubleshooting</span>
+            </div>
+            <div class="feature-item">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+              </svg>
+              <span>Order status & delivery inquiries</span>
+            </div>
+          </div>
+          
+          <div class="email-alternatives">
+            <p class="alternatives-title">Email not working?</p>
+            <div class="alternative-methods">
+              <button class="alt-method-btn" (click)="openEmailClient()" title="Try alternative email method">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                </svg>
+                Open Email App
+              </button>
+              <button class="alt-method-btn" (click)="copyEmailToClipboard()" title="Copy email to compose manually">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>
+                Copy Email
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Hours Card -->
+        <div class="contact-card">
+          <div class="card-icon">
+            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Response Times</h3>
+          <p class="card-description">
+            We strive to respond to all inquiries promptly during business hours.
+          </p>
+          <div class="hours-info">
+            <div class="hours-item">
+              <span class="hours-label">Email Response</span>
+              <span class="hours-value">Within 24 hours</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Business Days</span>
+              <span class="hours-value">Monday - Friday</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Weekend Support</span>
+              <span class="hours-value">Limited availability</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion Section -->
+  <section class="faq-accordion-section">
+    <div class="faq-container">
+      <div class="faq-header">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <p class="faq-subtitle">
+          Find quick answers to common questions about our products, compatibility, and services.
+        </p>
+      </div>
+      
+      <div class="faq-accordion">
+        @for (faq of faqItems; track faq.question; let i = $index) {
+          <div 
+            class="faq-accordion-item"
+            [class.active]="isFaqActive(i)"
+          >
+            <button 
+              class="faq-question-button"
+              (click)="toggleFaq(i)"
+              [attr.aria-expanded]="isFaqActive(i)"
+            >
+              <span class="faq-question">{{ faq.question }}</span>
+              <svg 
+                class="faq-chevron" 
+                width="20" 
+                height="20" 
+                fill="currentColor" 
+                viewBox="0 0 16 16"
+              >
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
+            <div class="faq-answer-wrapper" [class.expanded]="isFaqActive(i)">
+              <div class="faq-answer">
+                <p>{{ faq.answer }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Contact Us?</h2>
+        <p class="cta-description">
+          Don't hesitate to reach out with any questions or concerns before placing your order. 
+          We're here to ensure you get the right key fob for your vehicle.
+        </p>
+        <a href="mailto:autokeydeals1@gmail.com?subject=AutoKeyDeals Support Request&body=Hello AutoKeyDeals Team,%0D%0A%0D%0AI would like to inquire about:%0D%0A%0D%0A[Please describe your question or concern here]%0D%0A%0D%0AMy vehicle information (if applicable):%0D%0AYear: %0D%0AMake: %0D%0AModel: %0D%0A%0D%0AThank you for your assistance!" class="cta-button" title="Click to send us an email">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+          </svg>
+          Send Us an Email
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
