@@ -54,13 +54,13 @@
           </select>
         </div>
 
-        <!-- Sort -->
+        <!-- Model Filter -->
         <div class="filter-group">
-          <label class="filter-label">Sort By</label>
-          <select class="filter-select" [(ngModel)]="sortBy">
-            @for (option of sortOptions; track option.value) {
-              <option [value]="option.value">
-                {{ option.label }}
+          <label class="filter-label">Vehicle Model</label>
+          <select class="filter-select" [(ngModel)]="selectedModel">
+            @for (model of availableModels; track model) {
+              <option [value]="model === 'All Models' ? '' : model">
+                {{ model }}
               </option>
             }
           </select>

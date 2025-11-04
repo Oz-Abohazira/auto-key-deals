@@ -20,16 +20,11 @@ export class CatalogPage implements OnInit {
   // Filter subjects for reactive filtering
   private searchTerm$ = new BehaviorSubject<string>('');
   private selectedBrand$ = new BehaviorSubject<string>('');
-  private sortBy$ = new BehaviorSubject<string>('name');
+  private selectedModel$ = new BehaviorSubject<string>('');
 
   // Filter options
   availableBrands: string[] = ['All Brands'];
-  sortOptions = [
-    { value: 'name', label: 'Name A-Z' },
-    { value: 'name-desc', label: 'Name Z-A' },
-    { value: 'vehicles-count', label: 'Most Compatible' },
-    { value: 'vehicles-count-desc', label: 'Least Compatible' }
-  ];
+  availableModels: string[] = ['All Models'];
 
   constructor(private productService: ProductService) { }
 
@@ -47,14 +42,34 @@ export class CatalogPage implements OnInit {
       this.availableBrands = ['All Brands', ...Array.from(brands).sort()];
     });
 
+    // Build available models dynamically based on products and selected brand
+    combineLatest([this.products$, this.selectedBrand$]).subscribe(([products, selectedBrand]) => {
+      const models = new Set<string>();
+      products.forEach(product => {
+        product.supportedVehicles.forEach(vehicle => {
+          if (!selectedBrand || selectedBrand === 'All Brands' || vehicle.make === selectedBrand) {
+            models.add(vehicle.model);
+          }
+        });
+      });
+      const list = Array.from(models).sort();
+      this.availableModels = ['All Models', ...list];
+
+      // If current selected model is no longer available (due to brand change), reset it
+      const current = this.selectedModel$.value;
+      if (current && !list.includes(current)) {
+        this.selectedModel$.next('');
+      }
+    });
+
     // Set up filtered products stream
     this.filteredProducts$ = combineLatest([
       this.products$,
       this.searchTerm$,
       this.selectedBrand$,
-      this.sortBy$
+      this.selectedModel$
     ]).pipe(
-      map(([products, searchTerm, selectedBrand, sortBy]) => {
+      map(([products, searchTerm, selectedBrand, selectedModel]) => {
         let filtered = [...products];
 
         // Search filter
@@ -80,31 +95,29 @@ export class CatalogPage implements OnInit {
           );
         }
 
+        // Model filter
+        if (selectedModel && selectedModel !== 'All Models') {
+          filtered = filtered.filter(product =>
+            product.supportedVehicles.some(vehicle =>
+              vehicle.model === selectedModel &&
+              (!selectedBrand || selectedBrand === 'All Brands' || vehicle.make === selectedBrand)
+            )
+          );
+        }
+
         // Reorder vehicles to show matching ones first
         filtered = filtered.map(product => ({
           ...product,
           supportedVehicles: this.prioritizeMatchingVehicles(
             product.supportedVehicles, 
             searchTerm, 
-            selectedBrand
+            selectedBrand,
+            selectedModel
           )
         }));
 
-        // Sort
-        filtered.sort((a, b) => {
-          switch (sortBy) {
-            case 'name':
-              return a.name.localeCompare(b.name);
-            case 'name-desc':
-              return b.name.localeCompare(a.name);
-            case 'vehicles-count':
-              return b.supportedVehicles.length - a.supportedVehicles.length;
-            case 'vehicles-count-desc':
-              return a.supportedVehicles.length - b.supportedVehicles.length;
-            default:
-              return 0;
-          }
-        });
+        // Default sort by name for stable presentation
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
 
         return filtered;
       })
@@ -128,19 +141,19 @@ export class CatalogPage implements OnInit {
     this.selectedBrand$.next(value);
   }
 
-  get sortBy(): string {
-    return this.sortBy$.value;
+  get selectedModel(): string {
+    return this.selectedModel$.value;
   }
 
-  set sortBy(value: string) {
-    this.sortBy$.next(value);
+  set selectedModel(value: string) {
+    this.selectedModel$.next(value);
   }
 
   // Check if any filters are active
   get hasActiveFilters(): boolean {
     return this.searchTerm$.value.trim() !== '' ||
       this.selectedBrand$.value !== '' ||
-      this.sortBy$.value !== 'name';
+      this.selectedModel$.value !== '';
   }
 
   getVehicleFullName(vehicle: Vehicle): string {
@@ -158,21 +171,23 @@ export class CatalogPage implements OnInit {
   clearFilters() {
     this.searchTerm$.next('');
     this.selectedBrand$.next('');
-    this.sortBy$.next('name');
+    this.selectedModel$.next('');
   }
 
   // Method to prioritize matching vehicles in the display
   private prioritizeMatchingVehicles(
     vehicles: Vehicle[], 
     searchTerm: string, 
-    selectedBrand: string
+    selectedBrand: string,
+    selectedModel: string
   ): Vehicle[] {
-    if (!searchTerm.trim() && !selectedBrand) {
+    if (!searchTerm.trim() && !selectedBrand && !selectedModel) {
       return vehicles; // No filters, return original order
     }
 
     const search = searchTerm.toLowerCase().trim();
     const brand = selectedBrand && selectedBrand !== 'All Brands' ? selectedBrand : '';
+    const model = selectedModel && selectedModel !== 'All Models' ? selectedModel : '';
 
     // Separate matching and non-matching vehicles
     const matchingVehicles: Vehicle[] = [];
@@ -195,6 +210,14 @@ export class CatalogPage implements OnInit {
         isMatch = true;
       }
 
+      // Check if vehicle matches selected model
+      if (model && vehicle.model === model) {
+        // Also respect brand if set; if brand is set, ensure make matches
+        if (!brand || vehicle.make === brand) {
+          isMatch = true;
+        }
+      }
+
       if (isMatch) {
         matchingVehicles.push(vehicle);
       } else {
@@ -214,6 +237,7 @@ export class CatalogPage implements OnInit {
   isVehicleMatching(vehicle: Vehicle): boolean {
     const search = this.searchTerm$.value.toLowerCase().trim();
     const brand = this.selectedBrand$.value;
+    const model = this.selectedModel$.value;
 
     if (search && (
       vehicle.make.toLowerCase().includes(search) ||
@@ -225,6 +249,12 @@ export class CatalogPage implements OnInit {
 
     if (brand && brand !== 'All Brands' && vehicle.make === brand) {
       return true;
+    }
+
+    if (model && model !== 'All Models' && vehicle.model === model) {
+      if (!brand || brand === 'All Brands' || vehicle.make === brand) {
+        return true;
+      }
     }
 
     return false;
