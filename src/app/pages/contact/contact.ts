@@ -15,24 +15,18 @@ export class ContactPage {
   faqItems = [
     {
       question: 'How do I know if a key fob is compatible with my car?',
-      answer: 'Check our catalog for your vehicle\'s make, model, and year. For additional verification, contact us with your VIN number and we\'ll help you find the perfect match.'
+      answer: `View our catalog and check our catalog for your vehicle's make, model, and year. 
+               This will help you quickly see what parts are available without needing to reach out for availability`,
     },
     {
       question: 'Do you offer programming services?',
-      answer: 'We provide detailed step-by-step programming instructions with each key fob purchase. For complex cases, we can recommend qualified local automotive locksmiths in your area.'
-    },
-    {
-      question: 'What\'s your return policy?',
-      answer: 'We offer a 30-day return policy for unused key fobs in original packaging. Contact us at autokeydeals1@gmail.com for return authorization and detailed instructions.'
+      answer: `We provide detailed step-by-step programming instructions with each key fob purchase. 
+              This instructions are only for supported key fobs - You can check it in our catalog or Amazon listing page`
     },
     {
       question: 'How long does shipping typically take?',
-      answer: 'Standard shipping takes 3-7 business days. We also offer expedited shipping options for urgent orders. All orders are processed within 24 hours on business days.'
+      answer: 'All orders are fulfilled and shipped through Amazon. Delivery times follow Amazon’s standard shipping schedules, which usually range from 2 to 5 business days depending on your location and selected shipping method.'
     },
-    {
-      question: 'Do you provide warranty coverage?',
-      answer: 'Yes, all our key fobs come with a 1-year warranty against manufacturing defects. This covers functionality issues but not physical damage from misuse.'
-    }
   ];
 
   toggleFaq(index: number): void {
@@ -88,14 +82,14 @@ Thank you for your assistance!`;
 
     const encodedSubject = encodeURIComponent(subject);
     const encodedBody = encodeURIComponent(body);
-    
+
     // Create multiple fallback mailto URLs
     const mailtoUrls = [
       `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`,
       `mailto:${email}?subject=${encodedSubject}`,
       `mailto:${email}`
     ];
-    
+
     // Try each URL in sequence
     let urlIndex = 0;
     const tryNextUrl = () => {
@@ -106,7 +100,7 @@ Thank you for your assistance!`;
           console.error(`Failed to open mailto URL ${urlIndex + 1}:`, error);
         }
         urlIndex++;
-        
+
         // If none worked, provide manual options
         if (urlIndex === mailtoUrls.length) {
           setTimeout(() => {
@@ -115,7 +109,7 @@ Thank you for your assistance!`;
         }
       }
     };
-    
+
     tryNextUrl();
   }
 
@@ -151,7 +145,7 @@ Model:
 Thank you for your assistance!`;
 
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
+
     try {
       window.open(gmailUrl, '_blank');
     } catch (error) {

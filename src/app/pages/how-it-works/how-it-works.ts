@@ -41,11 +41,11 @@ export class HowItWorksPage implements OnInit, OnDestroy, AfterViewInit {
     {
       title: 'Delivery Arriving!',
       subtitle: 'Recieve our Package',
-      description: 'Your package includes a key fob and step-by-step programming instructions. We handle most of the setup — you just complete the final step',
+      description: 'The package includes a key that we specifically cut for your car. We handle most of the setup — you just complete the final step',
       features: [
         // 'Amazon Delivery',
         'Multiple payment options',
-        'Express shipping available',
+        // 'Express shipping available',
         'Order tracking included'
       ],
       bgGradient: 'linear-gradient(135deg, #fe4f4fff 0%, #530f0fff 100%)'
@@ -57,7 +57,7 @@ export class HowItWorksPage implements OnInit, OnDestroy, AfterViewInit {
       features: [
         'No Surprises',
         'Quick and Easy',
-        'Technical assistance'
+        // 'Technical assistance'
       ],
       bgGradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
     }
