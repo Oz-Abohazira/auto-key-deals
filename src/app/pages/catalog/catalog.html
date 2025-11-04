@@ -128,17 +128,31 @@
                     <span class="vehicle-count">({{ product.supportedVehicles.length }})</span>
                   </h4>
                   <div class="vehicles-grid">
-                    @for (vehicle of product.supportedVehicles.slice(0, 2); track vehicle.fullName) {
+                    @for (vehicle of getVisibleVehicles(product.supportedVehicles, product.id); track vehicle.fullName) {
                       <div 
                         class="vehicle-chip"
                         [class.matching]="isVehicleMatching(vehicle)">
                         {{ getVehicleFullName(vehicle) }}
                       </div>
                     }
-                    @if (product.supportedVehicles.length > 2) {
-                      <div class="vehicle-chip more-vehicles">
-                        +{{ product.supportedVehicles.length - 2 }} more
-                      </div>
+                    @if (getRemainingVehiclesCount(product.supportedVehicles, product.id) > 0) {
+                      <button 
+                        type="button"
+                        class="vehicle-chip more-vehicles"
+                        (click)="toggleExpanded(product.id)"
+                        [attr.aria-expanded]="isExpanded(product.id)"
+                        [attr.aria-controls]="'vehicles-' + product.id">
+                        +{{ getRemainingVehiclesCount(product.supportedVehicles, product.id) }} more
+                      </button>
+                    } @else if (isExpanded(product.id) && product.supportedVehicles.length > 0) {
+                      <button 
+                        type="button"
+                        class="vehicle-chip more-vehicles"
+                        (click)="toggleExpanded(product.id)"
+                        [attr.aria-expanded]="isExpanded(product.id)"
+                        [attr.aria-controls]="'vehicles-' + product.id">
+                        Show less
+                      </button>
                     }
                   </div>
                 </div>

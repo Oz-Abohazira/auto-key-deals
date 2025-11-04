@@ -26,6 +26,9 @@ export class CatalogPage implements OnInit {
   availableBrands: string[] = ['All Brands'];
   availableModels: string[] = ['All Models'];
 
+  // UI state: expanded vehicles per product
+  private expandedProducts = new Set<number>();
+
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -239,6 +242,11 @@ export class CatalogPage implements OnInit {
     const brand = this.selectedBrand$.value;
     const model = this.selectedModel$.value;
 
+    // If a model is selected, highlight only by model (ignore brand/search for highlight)
+    if (model && model !== 'All Models') {
+      return vehicle.model === model;
+    }
+
     if (search && (
       vehicle.make.toLowerCase().includes(search) ||
       vehicle.model.toLowerCase().includes(search) ||
@@ -250,7 +258,6 @@ export class CatalogPage implements OnInit {
     if (brand && brand !== 'All Brands' && vehicle.make === brand) {
       return true;
     }
-
     if (model && model !== 'All Models' && vehicle.model === model) {
       if (!brand || brand === 'All Brands' || vehicle.make === brand) {
         return true;
@@ -261,15 +268,34 @@ export class CatalogPage implements OnInit {
   }
 
   // Get visible vehicles based on active filters
-  getVisibleVehicles(vehicles: Vehicle[]): Vehicle[] {
+  getVisibleVehicles(vehicles: Vehicle[], productId: number): Vehicle[] {
+    if (this.isExpanded(productId)) {
+      return vehicles;
+    }
     // Show more vehicles when filters are active to display matching results
     const maxVisible = this.hasActiveFilters ? 6 : 3;
     return vehicles.slice(0, maxVisible);
   }
 
   // Get count of remaining vehicles
-  getRemainingVehiclesCount(vehicles: Vehicle[]): number {
+  getRemainingVehiclesCount(vehicles: Vehicle[], productId: number): number {
+    if (this.isExpanded(productId)) {
+      return 0;
+    }
     const maxVisible = this.hasActiveFilters ? 6 : 3;
     return Math.max(0, vehicles.length - maxVisible);
+  }
+
+  // Expanded state helpers
+  isExpanded(productId: number): boolean {
+    return this.expandedProducts.has(productId);
+  }
+
+  toggleExpanded(productId: number): void {
+    if (this.expandedProducts.has(productId)) {
+      this.expandedProducts.delete(productId);
+    } else {
+      this.expandedProducts.add(productId);
+    }
   }
 }
