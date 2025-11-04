@@ -51,7 +51,27 @@ module.exports = (req, res) => {
         // },
         {
           id: 3,
-          name: 'GM Key Fob #1',
+          name: '4 Button - GM Flip Key Fob',
+          description: '4 Button - OHT01060512',
+          imageUrl: '/assets/images/key3.jpg',
+          supportedVehicles: [
+            { minYear: 2010, year: 2012, make: 'Buick', model: 'Allure' },
+            { minYear: 2014, year: 2019, make: 'Buick', model: 'Encore' },
+            { minYear: 2010, year: 2016, make: 'Buick', model: 'Lacrosse' },
+            { minYear: 2011, year: 2017, make: 'Buick', model: 'Regal' },
+            { minYear: 2012, year: 2017, make: 'Buick', model: 'Verano' },
+            { minYear: 2010, year: 2016, make: 'Chevrolet', model: 'Camaro' },
+            { minYear: 2011, year: 2015, make: 'Chevrolet', model: 'Cruze' },
+            { minYear: 2010, year: 2019, make: 'Chevrolet', model: 'Equinox' },
+            { minYear: 2013, year: 2016, make: 'Chevrolet', model: 'Malibu' },
+            { minYear: 2012, year: 2017, make: 'Chevrolet', model: 'Sonic 4 Door' },
+            { minYear: 2010, year: 2019, make: 'GMC', model: 'Terrain' }
+          ],
+          serviceTypes: ['Cut by Image', 'DIY Chip Exchange'],
+        },
+        {
+          id: 4,
+          name: '5 Button - GM Flip Key Fob',
           description: '4 Button or 5 Button - OHT01060512',
           imageUrl: '/assets/images/key3.jpg',
           supportedVehicles: [
@@ -60,29 +80,13 @@ module.exports = (req, res) => {
             { minYear: 2010, year: 2016, make: 'Buick', model: 'Lacrosse' },
             { minYear: 2011, year: 2017, make: 'Buick', model: 'Regal' },
             { minYear: 2012, year: 2017, make: 'Buick', model: 'Verano' },
-          ],
-          serviceTypes: ['Cut by Image', 'DIY Chip Exchange'],
-        },
-        {
-          id: 4,
-          name: 'GM Key Fob #2',
-          description: '4 Button or 5 Button - OHT01060512',
-          imageUrl: '/assets/images/key3.jpg',
-          supportedVehicles: [
             { minYear: 2010, year: 2016, make: 'Chevrolet', model: 'Camaro' },
             { minYear: 2011, year: 2015, make: 'Chevrolet', model: 'Cruze' },
             { minYear: 2010, year: 2019, make: 'Chevrolet', model: 'Equinox' },
             { minYear: 2013, year: 2016, make: 'Chevrolet', model: 'Malibu' },
             { minYear: 2012, year: 2017, make: 'Chevrolet', model: 'Sonic 4 Door' },
+            { minYear: 2010, year: 2019, make: 'GMC', model: 'Terrain' }
           ],
-          serviceTypes: ['Cut by Image', 'DIY Chip Exchange'],
-        },
-        {
-          id: 5,
-          name: 'GM Key Fob #3',
-          description: '4 Button or 5 Button - OHT01060512',
-          imageUrl: '/assets/images/key3.jpg',
-          supportedVehicles: [{ minYear: 2010, year: 2019, make: 'GMC', model: 'Terrain' }],
           serviceTypes: ['Cut by Image', 'DIY Chip Exchange'],
         },
         {
